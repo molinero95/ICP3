@@ -25,7 +25,8 @@ module App.Controllers {
 
     function initKMediasView(): void{
         //Ocultar Menu principal
-        //hideMainMenu();
+        hideMainMenu();
+
     }
     function hideMainMenu():void{
         $("#menuDiv").hide();

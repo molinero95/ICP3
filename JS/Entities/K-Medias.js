@@ -14,8 +14,11 @@ var App;
             }
             KMedias.prototype.start = function () {
             };
-            KMedias.prototype.pertenencia = function (x, v) {
-                return this.moduloDifCuad(x[0], v[0]) + this.moduloDifCuad(x[1], v[1]);
+            KMedias.prototype.pertenencia = function (x, v, c) {
+                var res = 0;
+                for (var i = 0; i < c; i++)
+                    res += this.moduloDifCuad(x[i], v[i]);
+                return res;
             };
             KMedias.prototype.moduloDifCuad = function (xi, vi) {
                 return Math.pow(Math.abs(xi - vi), 2);

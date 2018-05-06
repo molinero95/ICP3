@@ -4,6 +4,7 @@ var App;
     (function (Controllers) {
         $(function () {
             $("#btnRead").on("click", readFile);
+            $("#kMediasBtn").on("click", initKMediasView);
         });
         function readFile(event) {
             var file1 = $("#datatxt").prop("files")[0];
@@ -21,6 +22,15 @@ var App;
         }
         function readEnd() {
             var fileContent = this.result;
+        }
+        function initKMediasView() {
+            hideMainMenu();
+        }
+        function hideMainMenu() {
+            $("#menuDiv").hide();
+        }
+        function showMainMenu() {
+            $("#menuDiv").show();
         }
     })(Controllers = App.Controllers || (App.Controllers = {}));
 })(App || (App = {}));
