@@ -5,7 +5,8 @@ module App.Entities {
         b: number;
         e: number;
         c: number;
-        constructor() {
+        data: Array<number>;
+        constructor(data: Array<number>) {
             //Inicializamos los valores.
             this.v = [];
             this.v[0] = [4.6, 3.0, 4.0, 0.0];
@@ -13,14 +14,18 @@ module App.Entities {
             this.b = 2;
             this.e = 0.01;
             this.c = 2;
+            this.data = data;
         }
 
         start(): void {
-
+            
         }
 
-        private pertenencia(x: Array<number>, v: Array<number>): number {
-            return this.moduloDifCuad(x[0], v[0]) + this.moduloDifCuad(x[1], v[1]);
+        private pertenencia(x: Array<number>, v: Array<number>, c: number): number {
+            let res = 0;
+            for(let i = 0;i < c; i++)
+                res += this.moduloDifCuad(x[i], v[i]);
+            return res;
         }
 
         private moduloDifCuad(xi: number, vi: number): number {

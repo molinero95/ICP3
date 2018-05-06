@@ -1,6 +1,7 @@
 module App.Controllers {
     $(() => {
         $("#btnRead").on("click", readFile);
+        $("#kMediasBtn").on("click", initKMediasView);
     })
 
     function readFile(event: Event): void {
@@ -21,4 +22,17 @@ module App.Controllers {
     function readEnd(): void {
         let fileContent = this.result;
     }
+
+    function initKMediasView(): void{
+        //Ocultar Menu principal
+        //hideMainMenu();
+    }
+    function hideMainMenu():void{
+        $("#menuDiv").hide();
+    }
+
+    function showMainMenu(): void{
+        $("#menuDiv").show();
+    }
+
 }
