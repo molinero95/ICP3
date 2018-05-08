@@ -1,4 +1,4 @@
-module Algorithms {
+module App.Algorithms {
     export class KMedias  {
         name: string;
         v: Array<Array<number>>;
@@ -58,7 +58,7 @@ module Algorithms {
             let numerador = Math.pow((1 / distance[row][col]), (1 / (this.b - 1)));
             let denominador = 0;
             for (let i = 0; i < this.b; i++)
-                denominador += Math.pow(distance[i][col], (1 / (this.b - 1)));
+                denominador += Math.pow(1/distance[i][col], (1 / (this.b - 1)));
 
             return numerador / denominador;
         }

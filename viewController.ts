@@ -1,3 +1,4 @@
+
 module App.Controllers {
     let kMedias = Algorithms.KMedias;
     $(() => {

@@ -2,7 +2,7 @@ var App;
 (function (App) {
     var Controllers;
     (function (Controllers) {
-        var kMedias = Algorithms.KMedias;
+        var kMedias = App.Algorithms.KMedias;
         $(function () {
             $("#btnRead").on("click", readFile);
             $("#kMediasBtn").on("click", initKMediasView);
