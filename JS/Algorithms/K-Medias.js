@@ -19,6 +19,52 @@ var App;
             KMedias.prototype.start = function () {
                 var dist = this.getDistance();
                 var U = this.getPertenence(dist);
+                this.calculateNewCenters(U);
+                while (!this.centersLessThanE()) {
+                    dist = this.getDistance();
+                    U = this.getPertenence(dist);
+                    this.calculateNewCenters(U);
+                }
+                console.log(this.v);
+            };
+            KMedias.prototype.centersLessThanE = function () {
+                var res = [];
+                var centerLessE = true;
+                var i = 0;
+                while (centerLessE && i < this.numClases) {
+                    res[i] = 0;
+                    for (var j = 0; j < this.numDatosMuestra; j++)
+                        res[i] += this.moduloDifCuad(this.vAnt[i][j], this.v[i][j]);
+                    if (res[i] > this.e)
+                        centerLessE = false;
+                    i++;
+                }
+                return centerLessE;
+            };
+            KMedias.prototype.calculateNewCenters = function (U) {
+                this.vAnt = [];
+                for (var i = 0; i < this.v.length; i++)
+                    this.vAnt[i] = this.v[i];
+                for (var i = 0; i < this.numClases; i++)
+                    this.v[i] = this.calculateCenter(U[i]);
+            };
+            KMedias.prototype.calculateCenter = function (Ui) {
+                var numerador = [];
+                var denom = [];
+                var result = [];
+                for (var i = 0; i < this.numDatosMuestra; i++) {
+                    denom[i] = 0;
+                    numerador[i] = 0;
+                }
+                for (var i = 0; i < this.numMuestras; i++) {
+                    for (var j = 0; j < this.numDatosMuestra; j++) {
+                        numerador[j] += Math.pow(Ui[i], this.b) * Number(this.data[i][j]);
+                        denom[j] += Math.pow(Ui[i], this.b);
+                    }
+                }
+                for (var i = 0; i < this.numDatosMuestra; i++)
+                    result[i] = numerador[i] / denom[i];
+                return result;
             };
             KMedias.prototype.getDistance = function () {
                 var dist = [];

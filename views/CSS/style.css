@@ -11,9 +11,18 @@ table{
     text-align: center;
 }
 
+.correctRead{
+    background: lightgreen;
+}
+
 
 #menuDiv{
     text-align: center;
+}
+
+#kMediasDiv{
+    text-align: center;
+
 }
 
 #menuDiv h3{
