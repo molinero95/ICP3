@@ -20,9 +20,8 @@ table{
     text-align: center;
 }
 
-#kMediasDiv{
+.algorithm{
     text-align: center;
-
 }
 
 #menuDiv h3{
@@ -34,6 +33,13 @@ table{
     text-align: center;
     float: none;
     margin: 0 auto;
-    width: 12rem;
+    width: 20rem;
     height: 8rem;
+    font-size: 30px;
 }  
+
+#reload{
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+}

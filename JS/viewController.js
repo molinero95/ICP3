@@ -7,6 +7,8 @@ var App;
             $(".btnRead").on("click", readDataFile);
             $(".btnCaseRead").on("click", readCaseFile);
             $("#kMediasBtn").on("click", initKMediasView);
+            $("#bayesBtn").on("click", initBayesView);
+            $("#reload").on("click", reloadPage);
         });
         var data = [];
         var context = null;
@@ -54,14 +56,16 @@ var App;
             var muestra = [file.split(",")];
             $(".btnCaseRead").addClass("correctRead");
             switch (view) {
-                case "kMedias": {
+                case "kMedias":
                     $("#lblKMedias").text("¿" + muestra[0][muestra[0].length - 1] + "?");
-                    setTimeout(function () {
-                        context.checkCase(muestra);
-                    }, 1000);
                     break;
-                }
+                case "Bayes":
+                    $("#lblBayes").text("¿" + muestra[0][muestra[0].length - 1] + "?");
+                    break;
             }
+            setTimeout(function () {
+                context.checkCase(muestra);
+            }, 1000);
         }
         function readEnd() {
             var file = this.result.split("\n");
@@ -73,6 +77,9 @@ var App;
                 case "kMedias":
                     context = new App.Algorithms.KMedias(data);
                     break;
+                case "Bayes":
+                    context = new App.Algorithms.Bayes(data);
+                    break;
             }
             context.start();
         }
@@ -80,12 +87,19 @@ var App;
             view = "kMedias";
             showKMedias();
         }
+        function initBayesView() {
+            view = "Bayes";
+            showBayes();
+        }
         function hideMainMenu() {
             $("#menuDiv").hide();
+            $("#reload").show();
         }
         function showMainMenu() {
             data = [];
             hideKMedias();
+            hideBayes();
+            $("#reload").hide();
             $("#menuDiv").show();
         }
         function showKMedias() {
@@ -96,6 +110,18 @@ var App;
         }
         function hideKMedias() {
             $("#kMediasDiv").hide();
+        }
+        function showBayes() {
+            hideMainMenu();
+            $("#lecturaKBayes").show();
+            $("#bayesDiv").show();
+            $("#casoBayes").hide();
+        }
+        function hideBayes() {
+            $("#bayesDiv").hide();
+        }
+        function reloadPage() {
+            location.reload();
         }
         function restoreReadButton() {
         }

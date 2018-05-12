@@ -5,6 +5,8 @@ module App.Controllers {
         $(".btnRead").on("click", readDataFile);
         $(".btnCaseRead").on("click", readCaseFile);
         $("#kMediasBtn").on("click", initKMediasView);
+        $("#bayesBtn").on("click", initBayesView);
+        $("#reload").on("click", reloadPage);
     })
 
     let data: Array<Array<string>> = [];
@@ -81,14 +83,22 @@ module App.Controllers {
         view = "kMedias";
         showKMedias();
     }
+
+    function initBayesView(): void{
+        view = "Bayes";
+        showBayes();
+    }
     
     function hideMainMenu():void{
         $("#menuDiv").hide();
+        $("#reload").show();
     }
 
     function showMainMenu(): void{
         data = [];
         hideKMedias();
+        hideBayes();
+        $("#reload").hide();
         $("#menuDiv").show();
     }
 
@@ -103,6 +113,21 @@ module App.Controllers {
         $("#kMediasDiv").hide();
     }
 
+    function showBayes(): void{
+        hideMainMenu();
+        $("#lecturaKBayes").show();
+        $("#bayesDiv").show();
+        $("#casoBayes").hide();
+
+    }
+
+    function hideBayes(): void{
+        $("#bayesDiv").hide();
+    }
+
+    function reloadPage(): void{
+        location.reload();
+    }
 
     function restoreReadButton(){
 

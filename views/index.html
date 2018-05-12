@@ -15,34 +15,21 @@
   <link rel="stylesheet" href="./CSS/style.css">
   <script src="../JS/Algorithms/Algorithm.js"></script>
   <script src="../JS/Algorithms/K-Medias.js"></script>
+  <script src="../JS/Algorithms/Bayes.js"></script>
   <script src="../JS/viewController.js"></script>
 </head>
 
 <body>
   <div id="menuDiv">
     <h3>Seleccionar algoritmo:</h3>
-    <table>
-      <tbody>
-        <tr class="">
-          <td class="text-right">
-            <button class="menuBtn " id="kMediasBtn">K-MEDIAS</button>
-          </td>
-          <td class="text-left">
-            <button class="menuBtn" id="otro1Btn">OTRO</button>
-          </td>
-        </tr>
-        <tr>
-          <td class="text-right">
-            <button class="menuBtn" id="otro2Btn">OTRO</button>
-          </td>
-          <td class="text-left  ">
-            <button class="menuBtn" id="otro3Btn">OTRO</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <button class="menuBtn " id="kMediasBtn">K-MEDIAS</button>
+    </div>
+    <div>
+      <button class="menuBtn " id="bayesBtn">BAYES</button>
+    </div>
   </div>
-  <div id="kMediasDiv">
+  <div id="kMediasDiv" class="algorithm">
     <h3>K-Medias</h3>
     <div>
       <span id="lecturaKMedias">Introduzca archivo de muestras:
@@ -59,6 +46,24 @@
     </div>
     <span id="lblKMedias"></span>
   </div>
+  <div id="bayesDiv" class="algorithm">
+    <h3>BAYES</h3>
+    <div>
+      <span id="lecturaBayes">Introduzca archivo de muestras:
+        <input type="file" class="datatxt">
+        <button class="btnRead btn">Aceptar</button>
+      </span>
+    </div>
+    <div>
+      <span id="casoBayes">
+        Introduzca el caso a comprobar:
+        <input type="file" class="caseDatatxt">
+        <button class="btnCaseRead btn">Aceptar</button>
+      </span>
+    </div>
+    <span id="lblBayes"></span>
+  </div>
+  <button id="reload" class="btn btn-primary">Volver</button>
 </body>
 
 </html>
