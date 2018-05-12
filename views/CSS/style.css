@@ -15,13 +15,21 @@ table{
     background: lightgreen;
 }
 
+.incorrectRead{
+    background: lightsalmon;
+}
 
 #menuDiv{
     text-align: center;
 }
+h3{
+    text-align: center;
+}
 
 .algorithm{
-    text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: left;
 }
 
 #menuDiv h3{

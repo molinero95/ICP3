@@ -20,16 +20,22 @@ module App.Controllers {
         })
         if (file1) {
             let ext1 = file1.name.split(".")[file1.name.split(".").length - 1];
-            if (String(ext1).toLowerCase() !== "txt")
+            if (String(ext1).toLowerCase() !== "txt"){
                 alert("Solo archivos .txt por favor");
+                $(".btnRead").removeClass("correctRead");
+                $(".btnRead").addClass("incorrectRead");
+            }
             else{
                 let fr = new FileReader();
                 fr.readAsText(file1, 'ISO-8859-1');
                 fr.onloadend = readEnd;
             }
         }
-        else
+        else{
             alert("Introduzca un archivo");
+            $(".btnRead").removeClass("correctRead");
+            $(".btnRead").addClass("incorrectRead");
+        }
     }
 
     function readCaseFile(event: Event): void {
@@ -40,28 +46,41 @@ module App.Controllers {
         })
         if (file1) {
             let ext1 = file1.name.split(".")[file1.name.split(".").length - 1];
-            if (String(ext1).toLowerCase() !== "txt")
+            if (String(ext1).toLowerCase() !== "txt"){
                 alert("Solo archivos .txt por favor");
+                $(".btnCaseRead").removeClass("correctRead");
+                $(".btnCaseRead").addClass("incorrectRead");
+            }
             else{
                 let fr = new FileReader();
                 fr.readAsText(file1, 'ISO-8859-1');
                 fr.onloadend = caseReadEnd;
             }
         }
-        else
+        else{
             alert("Introduzca un archivo");
+            $(".btnCaseRead").removeClass("correctRead");
+            $(".btnCaseRead").addClass("incorrectRead");
+        }
     }
 
     function caseReadEnd(): void{
         let file = this.result;
         let muestra = [file.split(",")];
+        $(".btnCaseRead").removeClass("incorrectRead");
         $(".btnCaseRead").addClass("correctRead");
         switch(view){
-            case "kMedias": $("#lblKMedias").text("¿" + muestra[0][muestra[0].length - 1] + "?"); break;
-            case "Bayes": $("#lblBayes").text("¿" + muestra[0][muestra[0].length - 1] + "?"); break;
+            case "kMedias": $("#lblKMedias").text("¿Pertenece a la clase " + muestra[0][muestra[0].length - 1] + "? "); break;
+            case "Bayes": $("#lblBayes").text("¿Pertenece a la clase " + muestra[0][muestra[0].length - 1] + "? "); break;
         }
         setTimeout(function(){
-            context.checkCase(muestra); 
+            let res:boolean = context.checkCase(muestra);
+            let strRes: string;
+            res? strRes="Sí":strRes="No";
+            switch(view){
+                case "kMedias": $("#lblKMedias").text($("#lblKMedias").text() + strRes); break;
+                case "Bayes": $("#lblBayes").text($("#lblBayes").text()); break;
+            } 
         }, 1000);
     }
 
@@ -70,6 +89,7 @@ module App.Controllers {
         for(let i = 0; i < file.length; i++){
             data[i] = file[i].split(",");
         }
+        $(".btnRead").removeClass("incorrectRead");
         $(".btnRead").addClass("correctRead");
         switch(view){
             case "kMedias": context = new Algorithms.KMedias(data); break;

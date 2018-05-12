@@ -21,16 +21,22 @@ var App;
             });
             if (file1) {
                 var ext1 = file1.name.split(".")[file1.name.split(".").length - 1];
-                if (String(ext1).toLowerCase() !== "txt")
+                if (String(ext1).toLowerCase() !== "txt") {
                     alert("Solo archivos .txt por favor");
+                    $(".btnRead").removeClass("correctRead");
+                    $(".btnRead").addClass("incorrectRead");
+                }
                 else {
                     var fr = new FileReader();
                     fr.readAsText(file1, 'ISO-8859-1');
                     fr.onloadend = readEnd;
                 }
             }
-            else
+            else {
                 alert("Introduzca un archivo");
+                $(".btnRead").removeClass("correctRead");
+                $(".btnRead").addClass("incorrectRead");
+            }
         }
         function readCaseFile(event) {
             var file1 = $(".caseDatatxt").prop("files")[0];
@@ -40,31 +46,48 @@ var App;
             });
             if (file1) {
                 var ext1 = file1.name.split(".")[file1.name.split(".").length - 1];
-                if (String(ext1).toLowerCase() !== "txt")
+                if (String(ext1).toLowerCase() !== "txt") {
                     alert("Solo archivos .txt por favor");
+                    $(".btnCaseRead").removeClass("correctRead");
+                    $(".btnCaseRead").addClass("incorrectRead");
+                }
                 else {
                     var fr = new FileReader();
                     fr.readAsText(file1, 'ISO-8859-1');
                     fr.onloadend = caseReadEnd;
                 }
             }
-            else
+            else {
                 alert("Introduzca un archivo");
+                $(".btnCaseRead").removeClass("correctRead");
+                $(".btnCaseRead").addClass("incorrectRead");
+            }
         }
         function caseReadEnd() {
             var file = this.result;
             var muestra = [file.split(",")];
+            $(".btnCaseRead").removeClass("incorrectRead");
             $(".btnCaseRead").addClass("correctRead");
             switch (view) {
                 case "kMedias":
-                    $("#lblKMedias").text("¿" + muestra[0][muestra[0].length - 1] + "?");
+                    $("#lblKMedias").text("¿Pertenece a la clase " + muestra[0][muestra[0].length - 1] + "? ");
                     break;
                 case "Bayes":
-                    $("#lblBayes").text("¿" + muestra[0][muestra[0].length - 1] + "?");
+                    $("#lblBayes").text("¿Pertenece a la clase " + muestra[0][muestra[0].length - 1] + "? ");
                     break;
             }
             setTimeout(function () {
-                context.checkCase(muestra);
+                var res = context.checkCase(muestra);
+                var strRes;
+                res ? strRes = "Sí" : strRes = "No";
+                switch (view) {
+                    case "kMedias":
+                        $("#lblKMedias").text($("#lblKMedias").text() + strRes);
+                        break;
+                    case "Bayes":
+                        $("#lblBayes").text($("#lblBayes").text());
+                        break;
+                }
             }, 1000);
         }
         function readEnd() {
@@ -72,6 +95,7 @@ var App;
             for (var i = 0; i < file.length; i++) {
                 data[i] = file[i].split(",");
             }
+            $(".btnRead").removeClass("incorrectRead");
             $(".btnRead").addClass("correctRead");
             switch (view) {
                 case "kMedias":

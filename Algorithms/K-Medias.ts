@@ -8,6 +8,9 @@ module App.Algorithms {
 
         constructor(data: Array<Array<string>>) {
             super(data);
+            $("#kMediasClases").text("Número de clases: "+this.numClases);
+            $("#kMediasMuestras").text("Número de muestras: "+this.numMuestras);
+            $("#kMediasDatos").text("Número de datos por muestra: "+this.numDatosMuestra);
             this.b = 2; //peso exponencial
             this.e = 0.01;  //tolerancia
             //Inicializamos los centros V
@@ -39,8 +42,8 @@ module App.Algorithms {
             console.log(pertenence);
             let index = this.getClass(pertenence);
             console.log(index);
-            alert(this.classes[index]);
-            return true;
+            alert("Resultado: "  + this.classes[index]);
+            return data[0][data[0].length - 1] === this.classes[index];
         }
 
         private getClass(array: Array<Array<number>>):number{

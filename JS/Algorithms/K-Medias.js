@@ -16,6 +16,9 @@ var App;
             __extends(KMedias, _super);
             function KMedias(data) {
                 var _this = _super.call(this, data) || this;
+                $("#kMediasClases").text("Número de clases: " + _this.numClases);
+                $("#kMediasMuestras").text("Número de muestras: " + _this.numMuestras);
+                $("#kMediasDatos").text("Número de datos por muestra: " + _this.numDatosMuestra);
                 _this.b = 2;
                 _this.e = 0.01;
                 _this.v = [];
@@ -40,8 +43,8 @@ var App;
                 console.log(pertenence);
                 var index = this.getClass(pertenence);
                 console.log(index);
-                alert(this.classes[index]);
-                return true;
+                alert("Resultado: " + this.classes[index]);
+                return data[0][data[0].length - 1] === this.classes[index];
             };
             KMedias.prototype.getClass = function (array) {
                 var max = 0;
