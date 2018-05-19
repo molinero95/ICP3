@@ -18,6 +18,10 @@ var App;
                 return _super.call(this, data) || this;
             }
             Bayes.prototype.start = function () {
+                for (var i = 0; i < this.numDatosMuestra; i++) {
+                    for (var j = 0; j < this.numClases; j++) {
+                    }
+                }
             };
             Bayes.prototype.checkCase = function (data) {
                 return true;

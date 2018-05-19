@@ -6,6 +6,7 @@ module App.Controllers {
         $(".btnCaseRead").on("click", readCaseFile);
         $("#kMediasBtn").on("click", initKMediasView);
         $("#bayesBtn").on("click", initBayesView);
+        $("#LloydBtn").on("click", initLloydView);
         $("#reload").on("click", reloadPage);
     })
 
@@ -94,6 +95,7 @@ module App.Controllers {
         switch(view){
             case "kMedias": context = new Algorithms.KMedias(data); break;
             case "Bayes": context = new Algorithms.Bayes(data); break;
+            case "Lloyd": context = new Algorithms.Lloyd(data); break;
         }
         context.start();
     }
@@ -108,6 +110,11 @@ module App.Controllers {
         view = "Bayes";
         showBayes();
     }
+
+    function initLloydView(): void{
+        view = "Lloyd";
+        showLLoyd();
+    }
     
     function hideMainMenu():void{
         $("#menuDiv").hide();
@@ -118,6 +125,7 @@ module App.Controllers {
         data = [];
         hideKMedias();
         hideBayes();
+        hideLloyd();
         $("#reload").hide();
         $("#menuDiv").show();
     }
@@ -125,24 +133,35 @@ module App.Controllers {
     function showKMedias(): void{
         hideMainMenu();
         $("#lecturaKMedias").show();
-        $("#kMediasDiv").show();
+        $("#KMediasDiv").show();
         $("#casoKMedias").hide();
     }
 
     function hideKMedias(): void{
-        $("#kMediasDiv").hide();
+        $("#KMediasDiv").hide();
     }
 
     function showBayes(): void{
         hideMainMenu();
         $("#lecturaKBayes").show();
-        $("#bayesDiv").show();
+        $("#BayesDiv").show();
         $("#casoBayes").hide();
 
     }
 
     function hideBayes(): void{
-        $("#bayesDiv").hide();
+        $("#BayesDiv").hide();
+    }
+
+    function showLLoyd(): void{
+        hideMainMenu();
+        $("#lecturaLloyd").show();
+        $("#LloydDiv").show();
+        $("#casoLloyd").hide();
+    }
+
+    function hideLloyd(){
+        $("#LloydDiv").hide();
     }
 
     function reloadPage(): void{

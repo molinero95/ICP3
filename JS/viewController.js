@@ -8,6 +8,7 @@ var App;
             $(".btnCaseRead").on("click", readCaseFile);
             $("#kMediasBtn").on("click", initKMediasView);
             $("#bayesBtn").on("click", initBayesView);
+            $("#LloydBtn").on("click", initLloydView);
             $("#reload").on("click", reloadPage);
         });
         var data = [];
@@ -104,6 +105,9 @@ var App;
                 case "Bayes":
                     context = new App.Algorithms.Bayes(data);
                     break;
+                case "Lloyd":
+                    context = new App.Algorithms.Lloyd(data);
+                    break;
             }
             context.start();
         }
@@ -115,6 +119,10 @@ var App;
             view = "Bayes";
             showBayes();
         }
+        function initLloydView() {
+            view = "Lloyd";
+            showLLoyd();
+        }
         function hideMainMenu() {
             $("#menuDiv").hide();
             $("#reload").show();
@@ -123,26 +131,36 @@ var App;
             data = [];
             hideKMedias();
             hideBayes();
+            hideLloyd();
             $("#reload").hide();
             $("#menuDiv").show();
         }
         function showKMedias() {
             hideMainMenu();
             $("#lecturaKMedias").show();
-            $("#kMediasDiv").show();
+            $("#KMediasDiv").show();
             $("#casoKMedias").hide();
         }
         function hideKMedias() {
-            $("#kMediasDiv").hide();
+            $("#KMediasDiv").hide();
         }
         function showBayes() {
             hideMainMenu();
             $("#lecturaKBayes").show();
-            $("#bayesDiv").show();
+            $("#BayesDiv").show();
             $("#casoBayes").hide();
         }
         function hideBayes() {
-            $("#bayesDiv").hide();
+            $("#BayesDiv").hide();
+        }
+        function showLLoyd() {
+            hideMainMenu();
+            $("#lecturaLloyd").show();
+            $("#LloydDiv").show();
+            $("#casoLloyd").hide();
+        }
+        function hideLloyd() {
+            $("#LloydDiv").hide();
         }
         function reloadPage() {
             location.reload();

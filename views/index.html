@@ -16,6 +16,7 @@
   <script src="../JS/Algorithms/Algorithm.js"></script>
   <script src="../JS/Algorithms/K-Medias.js"></script>
   <script src="../JS/Algorithms/Bayes.js"></script>
+  <script src="../JS/Algorithms/Lloyd.js"></script>
   <script src="../JS/viewController.js"></script>
 </head>
 
@@ -28,8 +29,11 @@
     <div>
       <button class="menuBtn " id="bayesBtn">BAYES</button>
     </div>
+    <div>
+      <button class="menuBtn " id="LloydBtn">LLOYD</button>
+    </div>
   </div>
-  <div id="kMediasDiv" class="algorithm">
+  <div id="KMediasDiv" class="algorithm">
     <h3>K-Medias</h3>
     <div>
       <span id="lecturaKMedias">Introduzca archivo de muestras:
@@ -51,7 +55,7 @@
     </div>
     <span id="lblKMedias"></span>
   </div>
-  <div id="bayesDiv" class="algorithm">
+  <div id="BayesDiv" class="algorithm">
     <h3>BAYES</h3>
     <div>
       <span id="lecturaBayes">Introduzca archivo de muestras:
@@ -72,6 +76,28 @@
       </span>
     </div>
     <span id="lblBayes"></span>
+  </div>
+  <div id="LloydDiv" class="algorithm">
+    <h3>LLOYD</h3>
+    <div>
+      <span id="lecturaLloyd">Introduzca archivo de muestras:
+        <input type="file" class="datatxt">
+        <button class="btnRead btn">Aceptar</button>
+      </span>
+    </div>
+    <ul>
+      <li id="LloydClases">Número de clases: </li>
+      <li id="LloydMuestras">Número de muestras:</li>
+      <li id="LloydDatos">Número de datos por muestra:</li>
+    </ul>
+    <div>
+      <span id="casoLloyd">
+        Introduzca el caso a comprobar:
+        <input type="file" class="caseDatatxt">
+        <button class="btnCaseRead btn">Aceptar</button>
+      </span>
+    </div>
+    <span id="lblLloyd"></span>
   </div>
   <button id="reload" class="btn btn-primary">Volver</button>
 </body>
