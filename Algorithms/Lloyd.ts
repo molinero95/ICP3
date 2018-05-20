@@ -43,6 +43,7 @@ module App.Algorithms {
             $("#casoLloyd").show();               
         }
         public checkCase(data: Array<Array<any>>): boolean{
+            //TODO
             return true;
         }
 
