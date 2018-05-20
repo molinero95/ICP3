@@ -23,6 +23,29 @@ var App;
                 }
                 console.log(this.classes);
             };
+            Algorithm.prototype.distance = function (x, v) {
+                var res = 0;
+                for (var i = 0; i < this.numDatosMuestra; i++)
+                    res += this.moduloDifCuad(Number(x[i]), v[i]);
+                return res;
+            };
+            Algorithm.prototype.moduloDifCuad = function (xi, vi) {
+                return Math.pow(Math.abs(xi - vi), 2);
+            };
+            Algorithm.prototype.centersLessThanE = function (vAnt) {
+                var res = [];
+                var centerLessE = true;
+                var i = 0;
+                while (centerLessE && i < this.numClases) {
+                    res[i] = 0;
+                    for (var j = 0; j < this.numDatosMuestra; j++)
+                        res[i] += this.moduloDifCuad(vAnt[i][j], this.v[i][j]);
+                    if (res[i] > this.e)
+                        centerLessE = false;
+                    i++;
+                }
+                return centerLessE;
+            };
             return Algorithm;
         }());
         Algorithms.Algorithm = Algorithm;

@@ -1,12 +1,11 @@
 module App.Algorithms {
     export class KMedias extends Algorithm {
-        v: Array<Array<number>>;
         vAnt: Array<Array<number>>;
         b: number;
         e: number;
         
 
-        constructor(data: Array<Array<string>>) {
+        constructor(data: Array<Array<any>>) {
             super(data);
             $("#kMediasClases").text("Número de clases: "+this.numClases);
             $("#kMediasMuestras").text("Número de muestras: "+this.numMuestras);
@@ -27,7 +26,7 @@ module App.Algorithms {
             let U: Array<Array<number>> = this.getPertenence(dist, this.data);
             //Calculamos los nuevos centros sobre las muestras iniciales
             this.calculateNewCenters(U);
-            while (!this.centersLessThanE()) {
+            while (!this.centersLessThanE(this.vAnt)) {
                 dist = this.getDistance(this.data);
                 U = this.getPertenence(dist, this.data);
                 this.calculateNewCenters(U);
@@ -36,7 +35,7 @@ module App.Algorithms {
 
         }
         
-        public checkCase(data: Array<Array<string>>){
+        public checkCase(data: Array<Array<any>>){
             let dist = this.getDistance(data);
             let pertenence = this.getPertenence(dist, data);
             console.log(pertenence);
@@ -56,21 +55,6 @@ module App.Algorithms {
                 }
             }
             return index;
-        }
-
-        private centersLessThanE(): boolean {
-            let res: Array<number> = [];
-            let centerLessE: boolean = true;
-            let i: number = 0;
-            while (centerLessE && i < this.numClases) {
-                res[i] = 0;
-                for (let j = 0; j < this.numDatosMuestra; j++)
-                    res[i] += this.moduloDifCuad(this.vAnt[i][j], this.v[i][j]);
-                if (res[i] > this.e)
-                    centerLessE = false;
-                i++;
-            }
-            return centerLessE;
         }
 
         private calculateNewCenters(U: Array<Array<number>>): void {
@@ -104,18 +88,18 @@ module App.Algorithms {
             return result;
         }
 
-        private getDistance(data: Array<Array<string>>): Array<Array<number>> {
+        private getDistance(data: Array<Array<any>>): Array<Array<number>> {
             let dist: Array<Array<number>> = [];
             for (let i = 0; i < this.numClases; i++)
                 for (let j = 0; j < data.length; j++) {
                     if (!dist[i])
                         dist[i] = [];
-                    dist[i][j] = this.distancia(data[j], this.v[i]);
+                    dist[i][j] = this.distance(data[j], this.v[i]);
                 }
             return dist;
         }
 
-        private getPertenence(dist: Array<Array<number>>, data: Array<Array<string>>): number[][] {
+        private getPertenence(dist: Array<Array<number>>, data: Array<Array<any>>): number[][] {
             let U: Array<Array<number>> = [];
             for (let i = 0; i < this.numClases; i++)
                 for (let j = 0; j < data.length; j++) {
@@ -136,16 +120,6 @@ module App.Algorithms {
             return numerador / denominador;
         }
 
-        private distancia(x: Array<string>, v: Array<number>): number {
-            let res = 0;
-            for (let i = 0; i < this.numDatosMuestra; i++)
-                res += this.moduloDifCuad(Number(x[i]), v[i]);
-            return res;
-        }
-
-        private moduloDifCuad(xi: number, vi: number): number {
-            return Math.pow(Math.abs(xi - vi), 2);
-        }
     }
 
 

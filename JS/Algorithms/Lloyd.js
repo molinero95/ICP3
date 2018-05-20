@@ -39,7 +39,7 @@ var App;
                         minValue = Number.MAX_VALUE;
                         minValIndex = 0;
                         for (var k = 0; k < this.v.length; k++) {
-                            var data = this.getDistance(this.data[j], this.v[k]);
+                            var data = this.distance(this.data[j], this.v[k]);
                             if (data < minValue) {
                                 minValIndex = k;
                                 minValue = data;
@@ -47,26 +47,13 @@ var App;
                         }
                         this.v[minValIndex] = this.calculateNewCenter(this.data[j], this.v[minValIndex]);
                     }
-                    stop = !this.allCentersLessThanE(vAnt);
+                    stop = this.centersLessThanE(vAnt);
                     i++;
                 }
+                $("#casoLloyd").show();
             };
             Lloyd.prototype.checkCase = function (data) {
                 return true;
-            };
-            Lloyd.prototype.allCentersLessThanE = function (vAnt) {
-                var greaterThanE = false;
-                var cal = 0;
-                var i = 0;
-                while (i < this.numClases && !greaterThanE) {
-                    cal = 0;
-                    for (var pos = 0; pos < this.numDatosMuestra; pos++) {
-                        cal += Math.pow((this.v[i][pos] - vAnt[i][pos]), 2);
-                    }
-                    cal > this.e ? greaterThanE = true : greaterThanE = false;
-                    i++;
-                }
-                return greaterThanE;
             };
             Lloyd.prototype.calculateNewCenter = function (xi, vi) {
                 var res = [];
@@ -74,13 +61,6 @@ var App;
                     res[pos] = ((Number(xi[pos]) - vi[pos]) * this.y) + vi[pos];
                 }
                 return res;
-            };
-            Lloyd.prototype.getDistance = function (xi, vi) {
-                var res = 0;
-                for (var pos = 0; pos < this.numDatosMuestra; pos++) {
-                    res += Math.pow((Number(xi[pos]) - vi[pos]), 2);
-                }
-                return Math.sqrt(res);
             };
             return Lloyd;
         }(Algorithms.Algorithm));

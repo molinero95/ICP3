@@ -3,8 +3,7 @@ module App.Algorithms {
         e: number;
         maxIter: number;
         y: number;
-        v: number[][];
-        constructor(data: Array<Array<string>>){
+        constructor(data: Array<Array<any>>){
             super(data);
             $("#LloydClases").text("Número de clases: "+this.numClases);
             $("#LloydMuestras").text("Número de muestras: "+this.numMuestras);
@@ -28,7 +27,7 @@ module App.Algorithms {
                     minValue = Number.MAX_VALUE;
                     minValIndex = 0;
                     for(let k = 0; k < this.v.length; k++) {    //Obtenemos la distancia al centro mas cercano y el centro
-                       let data = this.getDistance(this.data[j], this.v[k]);
+                       let data = this.distance(this.data[j], this.v[k]);
                        if(data < minValue){
                            minValIndex = k;
                            minValue = data;
@@ -38,42 +37,22 @@ module App.Algorithms {
                     this.v[minValIndex] = this.calculateNewCenter(this.data[j], this.v[minValIndex]);
                 }
                 //Comprobamos los nuevos centros con los antiguos
-                stop = !this.allCentersLessThanE(vAnt);
+                stop = this.centersLessThanE(vAnt);
                 i++;
             }
+            $("#casoLloyd").show();               
         }
-        public checkCase(data: Array<Array<string>>): boolean{
+        public checkCase(data: Array<Array<any>>): boolean{
             return true;
         }
 
-        private allCentersLessThanE(vAnt: number[][]): boolean {
-            let greaterThanE:boolean = false;
-            let cal = 0;
-            let i = 0;
-            while(i < this.numClases && !greaterThanE){
-                cal = 0;
-                for(let pos = 0; pos < this.numDatosMuestra; pos++){
-                    cal += Math.pow((this.v[i][pos] - vAnt[i][pos]),2);
-                }
-                cal > this.e? greaterThanE=true:greaterThanE=false;
-                i++;
-            }
-            return greaterThanE;
-        }
 
-        private calculateNewCenter(xi: string[], vi: number[]): number[]{
+        private calculateNewCenter(xi: any[], vi: number[]): number[]{
             let res = [];
             for(let pos = 0; pos < this.numDatosMuestra; pos++){
                 res[pos] = ((Number(xi[pos]) - vi[pos] )* this.y) + vi[pos];
             }
             return res;
-        }
-        private getDistance(xi:string[], vi:number[]):number{
-            let res = 0;
-            for(let pos = 0; pos < this.numDatosMuestra; pos++){
-                res += Math.pow((Number(xi[pos]) - vi[pos]), 2)
-            }
-            return Math.sqrt(res);
         }
         
     }

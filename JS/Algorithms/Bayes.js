@@ -15,7 +15,11 @@ var App;
         var Bayes = (function (_super) {
             __extends(Bayes, _super);
             function Bayes(data) {
-                return _super.call(this, data) || this;
+                var _this = _super.call(this, data) || this;
+                $("#BayesClases").text("Número de clases: " + _this.numClases);
+                $("#BayesMuestras").text("Número de muestras: " + _this.numMuestras);
+                $("#BayesDatos").text("Número de datos por muestra: " + _this.numDatosMuestra);
+                return _this;
             }
             Bayes.prototype.start = function () {
                 for (var i = 0; i < this.numDatosMuestra; i++) {

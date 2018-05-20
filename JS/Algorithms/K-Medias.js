@@ -30,7 +30,7 @@ var App;
                 var dist = this.getDistance(this.data);
                 var U = this.getPertenence(dist, this.data);
                 this.calculateNewCenters(U);
-                while (!this.centersLessThanE()) {
+                while (!this.centersLessThanE(this.vAnt)) {
                     dist = this.getDistance(this.data);
                     U = this.getPertenence(dist, this.data);
                     this.calculateNewCenters(U);
@@ -56,20 +56,6 @@ var App;
                     }
                 }
                 return index;
-            };
-            KMedias.prototype.centersLessThanE = function () {
-                var res = [];
-                var centerLessE = true;
-                var i = 0;
-                while (centerLessE && i < this.numClases) {
-                    res[i] = 0;
-                    for (var j = 0; j < this.numDatosMuestra; j++)
-                        res[i] += this.moduloDifCuad(this.vAnt[i][j], this.v[i][j]);
-                    if (res[i] > this.e)
-                        centerLessE = false;
-                    i++;
-                }
-                return centerLessE;
             };
             KMedias.prototype.calculateNewCenters = function (U) {
                 this.vAnt = [];
@@ -102,7 +88,7 @@ var App;
                     for (var j = 0; j < data.length; j++) {
                         if (!dist[i])
                             dist[i] = [];
-                        dist[i][j] = this.distancia(data[j], this.v[i]);
+                        dist[i][j] = this.distance(data[j], this.v[i]);
                     }
                 return dist;
             };
@@ -122,15 +108,6 @@ var App;
                 for (var i = 0; i < this.b; i++)
                     denominador += Math.pow(1 / distance[i][col], (1 / (this.b - 1)));
                 return numerador / denominador;
-            };
-            KMedias.prototype.distancia = function (x, v) {
-                var res = 0;
-                for (var i = 0; i < this.numDatosMuestra; i++)
-                    res += this.moduloDifCuad(Number(x[i]), v[i]);
-                return res;
-            };
-            KMedias.prototype.moduloDifCuad = function (xi, vi) {
-                return Math.pow(Math.abs(xi - vi), 2);
             };
             return KMedias;
         }(Algorithms.Algorithm));
