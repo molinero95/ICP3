@@ -19,7 +19,7 @@ var App;
                 $("#LloydClases").text("Número de clases: " + _this.numClases);
                 $("#LloydMuestras").text("Número de muestras: " + _this.numMuestras);
                 $("#LloydDatos").text("Número de datos por muestra: " + _this.numDatosMuestra);
-                _this.e = Math.pow(10, -10);
+                _this.e = 0.0000000001;
                 _this.maxIter = 10;
                 _this.y = 0.1;
                 _this.v = [];
@@ -45,28 +45,28 @@ var App;
                                 minValue = data;
                             }
                         }
-                        this.v[minValIndex] = this.calculateNewCenter(this.data[minValIndex], this.v[minValIndex]);
+                        this.v[minValIndex] = this.calculateNewCenter(this.data[j], this.v[minValIndex]);
                     }
-                    stop = this.anyCenterLessThanE(vAnt);
+                    stop = !this.allCentersLessThanE(vAnt);
                     i++;
                 }
             };
             Lloyd.prototype.checkCase = function (data) {
                 return true;
             };
-            Lloyd.prototype.anyCenterLessThanE = function (vAnt) {
-                var lessThanE = false;
+            Lloyd.prototype.allCentersLessThanE = function (vAnt) {
+                var greaterThanE = false;
                 var cal = 0;
                 var i = 0;
-                while (i < this.numClases && !lessThanE) {
+                while (i < this.numClases && !greaterThanE) {
                     cal = 0;
                     for (var pos = 0; pos < this.numDatosMuestra; pos++) {
                         cal += Math.pow((this.v[i][pos] - vAnt[i][pos]), 2);
                     }
-                    cal < this.e ? lessThanE = true : lessThanE = false;
+                    cal > this.e ? greaterThanE = true : greaterThanE = false;
                     i++;
                 }
-                return lessThanE;
+                return greaterThanE;
             };
             Lloyd.prototype.calculateNewCenter = function (xi, vi) {
                 var res = [];
@@ -80,7 +80,7 @@ var App;
                 for (var pos = 0; pos < this.numDatosMuestra; pos++) {
                     res += Math.pow((Number(xi[pos]) - vi[pos]), 2);
                 }
-                return Math.pow(res, 1 / 2);
+                return Math.sqrt(res);
             };
             return Lloyd;
         }(Algorithms.Algorithm));

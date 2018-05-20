@@ -9,7 +9,7 @@ module App.Algorithms {
             $("#LloydClases").text("Número de clases: "+this.numClases);
             $("#LloydMuestras").text("Número de muestras: "+this.numMuestras);
             $("#LloydDatos").text("Número de datos por muestra: "+this.numDatosMuestra);
-            this.e = Math.pow(10, -10);
+            this.e = 0.0000000001;
             this.maxIter = 10;
             this.y = 0.1;
             this.v = [];
@@ -24,10 +24,10 @@ module App.Algorithms {
             let vAnt: number[][];
             while(i < this.maxIter && !stop){    //cada iteracion se compone en un paso por cada muestra
                 vAnt = this.v.slice();
-                for(let j = 0; j < this.data.length; j++){ //por cada muestra calculamos los centros con los centros
+                for(let j = 0; j < this.data.length; j++){ //por cada muestra calculamos los nuevos centros con los centros
                     minValue = Number.MAX_VALUE;
                     minValIndex = 0;
-                    for(let k = 0; k < this.v.length; k++) {
+                    for(let k = 0; k < this.v.length; k++) {    //Obtenemos la distancia al centro mas cercano y el centro
                        let data = this.getDistance(this.data[j], this.v[k]);
                        if(data < minValue){
                            minValIndex = k;
@@ -35,10 +35,10 @@ module App.Algorithms {
                        }
                     }
                     //Una vez obtenido el menor valor calculamos el nuevo centro segun el minVal   
-                    this.v[minValIndex] = this.calculateNewCenter(this.data[minValIndex], this.v[minValIndex]);
+                    this.v[minValIndex] = this.calculateNewCenter(this.data[j], this.v[minValIndex]);
                 }
                 //Comprobamos los nuevos centros con los antiguos
-                stop = this.anyCenterLessThanE(vAnt);
+                stop = !this.allCentersLessThanE(vAnt);
                 i++;
             }
         }
@@ -46,19 +46,19 @@ module App.Algorithms {
             return true;
         }
 
-        private anyCenterLessThanE(vAnt: number[][]): boolean {
-            let lessThanE:boolean = false;
+        private allCentersLessThanE(vAnt: number[][]): boolean {
+            let greaterThanE:boolean = false;
             let cal = 0;
             let i = 0;
-            while(i < this.numClases && !lessThanE){
+            while(i < this.numClases && !greaterThanE){
                 cal = 0;
                 for(let pos = 0; pos < this.numDatosMuestra; pos++){
                     cal += Math.pow((this.v[i][pos] - vAnt[i][pos]),2);
                 }
-                cal < this.e? lessThanE=true:lessThanE=false;
+                cal > this.e? greaterThanE=true:greaterThanE=false;
                 i++;
             }
-            return lessThanE;
+            return greaterThanE;
         }
 
         private calculateNewCenter(xi: string[], vi: number[]): number[]{
@@ -73,7 +73,7 @@ module App.Algorithms {
             for(let pos = 0; pos < this.numDatosMuestra; pos++){
                 res += Math.pow((Number(xi[pos]) - vi[pos]), 2)
             }
-            return Math.pow(res, 1/2);
+            return Math.sqrt(res);
         }
         
     }
