@@ -38,14 +38,12 @@ module App.Algorithms {
         public checkCase(data: Array<Array<any>>){
             let dist = this.getDistance(data);
             let pertenence = this.getPertenence(dist, data);
-            console.log(pertenence);
-            let index = this.getClass(pertenence);
-            console.log(index);
+            let index = this.getMaxClass(pertenence);
             alert("Resultado: "  + this.classes[index]);
             return data[0][data[0].length - 1] === this.classes[index];
         }
 
-        private getClass(array: Array<Array<number>>):number{
+        private getMaxClass(array: Array<Array<number>>):number{
             let max = 0;
             let index = 0;
             for(let i = 0; i < array.length; i++){
@@ -56,6 +54,7 @@ module App.Algorithms {
             }
             return index;
         }
+
 
         private calculateNewCenters(U: Array<Array<number>>): void {
             this.vAnt = []

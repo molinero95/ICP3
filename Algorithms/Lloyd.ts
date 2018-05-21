@@ -43,8 +43,18 @@ module App.Algorithms {
             $("#casoLloyd").show();               
         }
         public checkCase(data: Array<Array<any>>): boolean{
-            //TODO
-            return true;
+            let distances = [];
+            let minD = Number.MAX_VALUE;
+            let index = 0;
+            for(let i = 0; i < this.numClases; i++){
+                let d = this.distance(data[0], this.v[i]);
+                if(d < minD){
+                    minD = d;
+                    index = i;
+                }
+            }
+            alert("Resultado: "  + this.classes[index]);
+            return this.classes[index] === data[0][this.numDatosMuestra].toString();
         }
 
 

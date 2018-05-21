@@ -48,6 +48,7 @@ module App.Controllers {
         switch (view) {
             case "kMedias": $("#lblKMedias").text("¿Pertenece a la clase " + muestra[0][muestra[0].length - 1] + "? "); break;
             case "Bayes": $("#lblBayes").text("¿Pertenece a la clase " + muestra[0][muestra[0].length - 1] + "? "); break;
+            case "Lloyd": $("#lblLloyd").text("¿Pertenece a la clase " + muestra[0][muestra[0].length - 1] + "? "); break;  
         }
         setTimeout(function () {
             let res: boolean = context.checkCase(muestra);
@@ -55,7 +56,8 @@ module App.Controllers {
             res ? strRes = "Sí" : strRes = "No";
             switch (view) {
                 case "kMedias": $("#lblKMedias").text($("#lblKMedias").text() + strRes); break;
-                case "Bayes": $("#lblBayes").text($("#lblBayes").text()); break;
+                case "Bayes": $("#lblBayes").text($("#lblBayes").text() + strRes); break;
+                case "Lloyd": $("#lblLloyd").text($("#lblLloyd").text() + strRes); break;
             }
         }, 1000);
     }

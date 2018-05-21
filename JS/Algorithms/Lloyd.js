@@ -53,7 +53,18 @@ var App;
                 $("#casoLloyd").show();
             };
             Lloyd.prototype.checkCase = function (data) {
-                return true;
+                var distances = [];
+                var minD = Number.MAX_VALUE;
+                var index = 0;
+                for (var i = 0; i < this.numClases; i++) {
+                    var d = this.distance(data[0], this.v[i]);
+                    if (d < minD) {
+                        minD = d;
+                        index = i;
+                    }
+                }
+                alert("Resultado: " + this.classes[index]);
+                return this.classes[index] === data[0][this.numDatosMuestra].toString();
             };
             Lloyd.prototype.calculateNewCenter = function (xi, vi) {
                 var res = [];

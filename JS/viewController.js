@@ -50,6 +50,9 @@ var App;
                 case "Bayes":
                     $("#lblBayes").text("¿Pertenece a la clase " + muestra[0][muestra[0].length - 1] + "? ");
                     break;
+                case "Lloyd":
+                    $("#lblLloyd").text("¿Pertenece a la clase " + muestra[0][muestra[0].length - 1] + "? ");
+                    break;
             }
             setTimeout(function () {
                 var res = context.checkCase(muestra);
@@ -60,7 +63,10 @@ var App;
                         $("#lblKMedias").text($("#lblKMedias").text() + strRes);
                         break;
                     case "Bayes":
-                        $("#lblBayes").text($("#lblBayes").text());
+                        $("#lblBayes").text($("#lblBayes").text() + strRes);
+                        break;
+                    case "Lloyd":
+                        $("#lblLloyd").text($("#lblLloyd").text() + strRes);
                         break;
                 }
             }, 1000);

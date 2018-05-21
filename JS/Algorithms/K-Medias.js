@@ -40,13 +40,11 @@ var App;
             KMedias.prototype.checkCase = function (data) {
                 var dist = this.getDistance(data);
                 var pertenence = this.getPertenence(dist, data);
-                console.log(pertenence);
-                var index = this.getClass(pertenence);
-                console.log(index);
+                var index = this.getMaxClass(pertenence);
                 alert("Resultado: " + this.classes[index]);
                 return data[0][data[0].length - 1] === this.classes[index];
             };
-            KMedias.prototype.getClass = function (array) {
+            KMedias.prototype.getMaxClass = function (array) {
                 var max = 0;
                 var index = 0;
                 for (var i = 0; i < array.length; i++) {
