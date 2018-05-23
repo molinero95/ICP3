@@ -40,6 +40,7 @@ module App.Algorithms {
                 stop = this.centersLessThanE(vAnt);
                 i++;
             }
+            this.showVs();
             $("#casoLloyd").show();               
         }
         public checkCase(data: Array<Array<any>>): boolean{
@@ -55,6 +56,24 @@ module App.Algorithms {
             }
             alert("Resultado: "  + this.classes[index]);
             return this.classes[index] === data[0][this.numDatosMuestra].toString();
+        }
+
+        private showVs():void{
+            let text1 = "v1: ";
+            let text2 = "v2: ";
+            for(let i = 0; i < this.v[0].length; i++){
+                if(i == this.v[0].length - 1){
+                    text1+= this.v[0][i].toFixed(3);
+                    text2+= this.v[1][i].toFixed(3);
+                }
+                else{
+                    text1+= this.v[0][i].toFixed(3) + ", "
+                    text2+= this.v[1][i].toFixed(3) + ", "
+                }
+                
+            }
+            $("#v1Lloyd").text(text1);
+            $("#v2Lloyd").text(text2);
         }
 
 

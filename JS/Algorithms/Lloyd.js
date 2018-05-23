@@ -50,6 +50,7 @@ var App;
                     stop = this.centersLessThanE(vAnt);
                     i++;
                 }
+                this.showVs();
                 $("#casoLloyd").show();
             };
             Lloyd.prototype.checkCase = function (data) {
@@ -65,6 +66,22 @@ var App;
                 }
                 alert("Resultado: " + this.classes[index]);
                 return this.classes[index] === data[0][this.numDatosMuestra].toString();
+            };
+            Lloyd.prototype.showVs = function () {
+                var text1 = "v1: ";
+                var text2 = "v2: ";
+                for (var i = 0; i < this.v[0].length; i++) {
+                    if (i == this.v[0].length - 1) {
+                        text1 += this.v[0][i].toFixed(3);
+                        text2 += this.v[1][i].toFixed(3);
+                    }
+                    else {
+                        text1 += this.v[0][i].toFixed(3) + ", ";
+                        text2 += this.v[1][i].toFixed(3) + ", ";
+                    }
+                }
+                $("#v1Lloyd").text(text1);
+                $("#v2Lloyd").text(text2);
             };
             Lloyd.prototype.calculateNewCenter = function (xi, vi) {
                 var res = [];

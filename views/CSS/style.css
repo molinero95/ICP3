@@ -22,6 +22,7 @@ table{
 #menuDiv{
     text-align: center;
 }
+
 h3{
     text-align: center;
 }
@@ -50,4 +51,10 @@ h3{
     position: fixed;
     bottom: 2rem;
     right: 2rem;
+}
+
+
+
+td{
+    text-align: left;
 }

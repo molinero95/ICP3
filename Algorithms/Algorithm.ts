@@ -51,6 +51,7 @@ module App.Algorithms {
                 res[i] = 0;
                 for (let j = 0; j < this.numDatosMuestra; j++)
                     res[i] += this.moduloDifCuad(vAnt[i][j], this.v[i][j]);
+                res[i] = Math.sqrt(res[i]);
                 if (res[i] > this.e)
                     centerLessE = false;
                 i++;

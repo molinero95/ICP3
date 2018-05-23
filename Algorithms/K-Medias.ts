@@ -31,8 +31,27 @@ module App.Algorithms {
                 U = this.getPertenence(dist, this.data);
                 this.calculateNewCenters(U);
             }
+            this.showVs();
             $("#casoKMedias").show();               
 
+        }
+
+        private showVs(): void{
+            let text1 = "v1: ";
+            let text2 = "v2: ";
+            for(let i = 0; i < this.v[0].length; i++){
+                if(i == this.v[0].length - 1){
+                    text1+= this.v[0][i].toFixed(3);
+                    text2+= this.v[1][i].toFixed(3);
+                }
+                else{
+                    text1+= this.v[0][i].toFixed(3) + ", "
+                    text2+= this.v[1][i].toFixed(3) + ", "
+                }
+                
+            }
+            $("#v1KMedias").text(text1);
+            $("#v2KMedias").text(text2);
         }
         
         public checkCase(data: Array<Array<any>>){

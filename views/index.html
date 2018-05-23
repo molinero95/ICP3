@@ -13,6 +13,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./CSS/style.css">
+  <script src="../node_modules/mathjs/dist/math.min.js"></script>
   <script src="../JS/Algorithms/Algorithm.js"></script>
   <script src="../JS/Algorithms/K-Medias.js"></script>
   <script src="../JS/Algorithms/Bayes.js"></script>
@@ -41,6 +42,10 @@
       <li id="kMediasMuestras">Número de muestras: </li>
       <li id="kMediasDatos">Número de datos por muestra: </li>
     </ul>
+    <hr>   
+    <div id="v1KMedias"></div>
+    <div id="v2KMedias"></div>
+    <hr>
     <div>
       <span id="casoKMedias">
         Introduzca el caso a comprobar:
@@ -52,12 +57,24 @@
   </div>
   <div id="BayesDiv" class="algorithm">
     <h3>BAYES</h3>
+    <hr>
     Iris2Clases.txt:
     <ul>
       <li id="BayesClases">Número de clases: </li>
       <li id="BayesMuestras">Número de muestras:</li>
       <li id="BayesDatos">Número de datos por muestra:</li>
     </ul>
+    <hr>
+    <div id="m1Bayes"></div>
+    <div id="m2Bayes"></div>
+    <hr>
+    <table id="CovarianzaBayes1">
+      <caption>C1</caption>
+    </table>
+    <table id="CovarianzaBayes2">
+      <caption>C2</caption>
+    </table>
+    <hr>
     <div>
       <span id="casoBayes">
         Introduzca el caso a comprobar:
@@ -69,12 +86,16 @@
   </div>
   <div id="LloydDiv" class="algorithm">
     <h3>LLOYD</h3>
-    Iris2Clases.txt:  
+    Iris2Clases.txt:
     <ul>
       <li id="LloydClases">Número de clases: </li>
       <li id="LloydMuestras">Número de muestras:</li>
       <li id="LloydDatos">Número de datos por muestra:</li>
     </ul>
+    <hr>
+    <div id="v1Lloyd"></div>
+    <div id="v2Lloyd"></div>
+    <hr>
     <div>
       <span id="casoLloyd">
         Introduzca el caso a comprobar:
